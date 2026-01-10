@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keranjang Belanja</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><img src="assets/logo.png" alt="Logo Warung Rumah"></a>
+            <div class="nav-icons">
+                <a href="address.html" class="nav-icon-link" title="Atur Alamat">
+                    <i class="fas fa-map-marker-alt"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="cart-wrapper">
+            <div class="cart-header">
+                <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali Belanja</a>
+                <h2>Keranjang Belanja</h2>
+            </div>
+            <div id="cart-items"></div>
+            <div class="cart-summary">
+                <div class="total-price">
+                    <span>Total Keseluruhan:</span>
+                    <strong id="total-amount">Rp 0</strong>
+                </div>
+                <button onclick="checkoutWhatsApp()" class="btn-checkout">
+                    Kirim Pesanan ke WhatsApp <i class="fab fa-whatsapp"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="products.js"></script>
+    <script src="script.js"></script>
+    <script>renderCart();</script>
+</body>
+</html>

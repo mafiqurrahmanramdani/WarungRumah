@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar Alamat | Warung Rumah</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><img src="assets/logo.png" alt="Logo Warung Rumah"></a>
+            <div class="nav-icons">
+                <a href="index.html" class="btn-back"><i class="fas fa-home"></i></a>
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="address-wrapper">
+            <div class="address-header">
+                <h2><i class="fas fa-map-marked-alt"></i> Alamat Saya</h2>
+                <button onclick="toggleAddressForm()" class="btn-add-address">+ Tambah Alamat</button>
+            </div>
+
+            <div id="address-form" class="address-form-card" style="display: none;">
+                <h3>Alamat Baru</h3>
+                <input type="text" id="addr-name" placeholder="Nama Penerima (Contoh: Budi)">
+                <input type="text" id="addr-phone" placeholder="Nomor HP (Contoh: 0812...)">
+                <textarea id="addr-detail" placeholder="Alamat Lengkap (Jalan, No Rumah, Kelurahan)"></textarea>
+                <div class="form-actions">
+                    <button onclick="saveNewAddress()" class="btn-save">Simpan Alamat</button>
+                    <button onclick="toggleAddressForm()" class="btn-cancel">Batal</button>
+                </div>
+            </div>
+
+            <div id="address-list" class="address-grid">
+                </div>
+        </div>
+    </main>
+    <script src="products.js"></script>
+    <script src="script.js"></script>
+    <script>renderAddressList();</script>
+</body>
+</html>
