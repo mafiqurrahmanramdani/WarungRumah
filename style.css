@@ -1,8 +1,17 @@
+#katalog {
+    scroll-margin-top: 80px; 
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
 * {
-    box-sizing: border-box; 
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
 :root {
     --primary: #25d366;
     --dark: #1e272e;
@@ -17,6 +26,116 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
+}
+
+.landing-hero {
+    background: linear-gradient(135deg, #25d366 0%, #16a34a 100%);
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 600px;
+}
+
+.hero-stats { display: flex; justify-content: center; gap: 15px; margin: 20px 0; font-size: 0.9rem; }
+.btn-explore {
+    display: inline-block;
+    background: white;
+    color: var(--primary);
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Search Box */
+.search-box {
+    background: white;
+    padding: 12px 18px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    margin-left: 10px;
+    font-size: 1rem;
+}
+
+.address-form-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 20px auto;
+}
+
+.address-form-card input, 
+.address-form-card textarea {
+    width: 100%; 
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1.5px solid #eee;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+.address-form-card input:focus, 
+.address-form-card textarea:focus {
+    border-color: #25d366;
+}
+
+.no-result {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    margin: 20px 0;
+}
+
+.no-result i {
+    font-size: 4rem;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.no-result h3 {
+    color: var(--dark);
+    margin-bottom: 10px;
+}
+
+.no-result p {
+    color: var(--gray);
+    margin-bottom: 20px;
+}
+
+.btn-reset {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .container { max-width: 1000px; margin: 0 auto; padding: 0 15px; }

@@ -25,17 +25,31 @@
         </div>
     </nav>
 
-    <header class="hero">
-        <h1>Katalog Warung Rumah</h1>
-        <p>Klik dari Rumah, Barang Sampai di Rumah.</p>
+    <header class="landing-hero">
+        <div class="container hero-content">
+            <h1>Warung Rumah</h1>
+            <p>Solusi belanja kebutuhan harian dari rumah, segar dan hemat setiap hari.</p>
+            <div class="hero-stats">
+                <span><i class="fas fa-check-circle"></i> Harga Grosir</span>
+                <span><i class="fas fa-shipping-fast"></i> Pengiriman Cepat</span>
+            </div>
+            <a href="#katalog" class="btn-explore">Mulai Belanja</a>
+        </div>
     </header>
 
-    <div class="category-filter container">
-        <button class="btn-cat active" onclick="filterCategory('semua', event)">Semua</button>
-        <button class="btn-cat" onclick="filterCategory('makanan', event)">Makanan</button>
-        <button class="btn-cat" onclick="filterCategory('minuman', event)">Minuman</button>
-        <button class="btn-cat" onclick="filterCategory('lainnya', event)">Lainnya</button>
-    </div>
+    <section id="katalog" class="container search-section">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="search-input" placeholder="Cari beras, sabun, atau kopi..." onkeyup="searchProduct()">
+        </div>
+        
+        <div class="category-filter">
+            <button class="btn-cat active" onclick="filterCategory('semua', event)">Semua</button>
+            <button class="btn-cat" onclick="filterCategory('makanan', event)">Makanan</button>
+            <button class="btn-cat" onclick="filterCategory('minuman', event)">Minuman</button>
+            <button class="btn-cat" onclick="filterCategory('lainnya', event)">Lainnya</button>
+        </div>
+    </section>
 
     <div id="direct-modal" class="modal">
         <div class="modal-content">
@@ -47,7 +61,9 @@
                 <span id="modal-qty-value">1</span>
                 <button onclick="changeModalQty(1)">+</button>
             </div>
-            <button id="btn-confirm-direct" class="btn-checkout">Pesan Sekarang</button>
+            <button id="btn-confirm-direct" class="btn-checkout">
+                Pesan Sekarang
+            </button>
         </div>
     </div>
 

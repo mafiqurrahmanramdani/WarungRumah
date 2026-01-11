@@ -76,9 +76,12 @@ function directOrder(id) {
     document.getElementById('direct-modal').style.display = 'flex';
     
     // Set fungsi klik pada tombol konfirmasi di modal
-    document.getElementById('btn-confirm-direct').onclick = function() {
-        sendDirectToWA();
-    };
+    const btnConfirm = document.getElementById('btn-confirm-direct');
+    if (btnConfirm) {
+        btnConfirm.onclick = function() {
+            sendDirectToWA();
+        };
+    }
 }
 
 // Mengubah angka di modal
@@ -272,4 +275,81 @@ function checkoutWhatsApp() {
     text += `*ALAMAT TUJUAN:*\nNama: ${activeAddr.name}\nHP: ${activeAddr.phone}\nAlamat: ${activeAddr.detail}`;
     
     window.location.href = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(text)}`;
+}
+
+function sendDirectToWA() {
+    // 1. Ambil data alamat dari localStorage
+    const savedAddresses = JSON.parse(localStorage.getItem('kios_addresses')) || [];
+    
+    // 2. VALIDASI ALAMAT: Jika belum ada alamat sama sekali
+    if (savedAddresses.length === 0) {
+        alert("Mohon atur alamat pengiriman terlebih dahulu!");
+        window.location.href = "address.html"; // Pindahkan ke halaman alamat
+        return;
+    }
+
+    // 3. Ambil detail produk dari modal
+    const p = currentDirectProduct;
+    const qty = currentDirectQty;
+    const totalBelanja = p.price * qty;
+    
+    // 4. Hitung Ongkir (Gratis jika belanja >= 50.000)
+    const ongkir = totalBelanja >= 50000 ? 0 : 5000;
+    const totalAkhir = totalBelanja + ongkir;
+
+    // 5. Ambil alamat yang sedang dipilih (index 0 jika belum ada yang dipilih)
+    const selectedIdx = localStorage.getItem('kios_selected_address') || 0;
+    const activeAddr = savedAddresses[selectedIdx];
+
+    // 6. Buat format pesan WhatsApp
+    const text = `*PESANAN WARUNG RUMAH*\n` +
+                 `------------------\n` +
+                 `- ${p.name} (${qty}x) = ${formatRupiah(totalBelanja)}\n` +
+                 `------------------\n` +
+                 `Ongkir: ${ongkir === 0 ? 'Gratis' : formatRupiah(ongkir)}\n` +
+                 `*TOTAL: ${formatRupiah(totalAkhir)}*\n\n` +
+                 `*ALAMAT PENGIRIMAN:*\n` +
+                 `Nama: ${activeAddr.name}\n` +
+                 `HP: ${activeAddr.phone}\n` +
+                 `Alamat: ${activeAddr.detail}`;
+    
+    // 7. Buka WhatsApp (Ganti nomor sesuai kebutuhan)
+    const waNumber = "6283866753442"; 
+    window.location.href = `https://api.whatsapp.com/send?phone=${waNumber}&text=${encodeURIComponent(text)}`;
+    
+    closeDirectModal(); // Tutup modal setelah sukses
+}
+
+function searchProduct() {
+    const query = document.getElementById('search-input').value.toLowerCase();
+    const grid = document.getElementById('product-grid');
+    
+    // Jika kolom pencarian kosong, tampilkan semua produk
+    if (query === "") {
+        renderProducts(allProducts);
+        return;
+    }
+
+    const filtered = allProducts.filter(p => p.name.toLowerCase().includes(query));
+    
+    if (filtered.length > 0) {
+        // Jika barang ditemukan, tampilkan barangnya
+        renderProducts(filtered);
+    } else {
+        // Jika barang TIDAK ADA, tampilkan pesan peringatan di area produk
+        grid.innerHTML = `
+            <div class="no-result">
+                <i class="fas fa-box-open"></i>
+                <h3>Waduh, barang tidak ditemukan!</h3>
+                <p>Coba cari dengan kata kunci lain atau hubungi admin via WA ya.</p>
+                <button onclick="resetSearch()" class="btn-reset">Lihat Semua Produk</button>
+            </div>
+        `;
+    }
+}
+
+// Fungsi tambahan untuk tombol reset
+function resetSearch() {
+    document.getElementById('search-input').value = "";
+    renderProducts(allProducts);
 }
