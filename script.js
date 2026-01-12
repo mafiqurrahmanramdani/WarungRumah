@@ -1,6 +1,15 @@
 let currentDirectProduct = null;
 let currentDirectQty = 1;
-const allProducts = getAllProducts();
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+const allProducts = shuffleArray(getAllProducts());
 const phoneNumber = "6283866753442";
 let cart = JSON.parse(localStorage.getItem('kios_cart')) || [];
 
@@ -35,9 +44,16 @@ function renderProducts(data = allProducts) {
 function filterCategory(cat, e) {
     document.querySelectorAll('.btn-cat').forEach(b => b.classList.remove('active'));
     e.target.classList.add('active');
-    const filtered = cat === 'semua' ? allProducts : allProducts.filter(p => 
-        Object.keys(productData).find(key => key === cat && productData[key].find(item => item.id === p.id))
-    );
+    
+    let filtered;
+    if (cat === 'semua') {
+        // Kita buat salinan array baru lalu acak lagi
+        filtered = shuffleArray([...allProducts]);
+    } else {
+        filtered = allProducts.filter(p => 
+            Object.keys(productData).find(key => key === cat && productData[key].find(item => item.id === p.id))
+        );
+    }
     renderProducts(filtered);
 }
 
